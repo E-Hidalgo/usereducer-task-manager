@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<TaskList />} />
             <Route exact path="/add" element={<TaskForm />} />
+            <Route exact path="/editTask/:id" element={<TaskForm />} />
           </Routes>
         </ContextProvider>
 

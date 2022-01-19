@@ -5,14 +5,7 @@ import { v4 } from "uuid"
 //? -------- SET INITIAL STATE -------------
 
 const initialState = {
-  tasks: [
-    {
-      id: "1",
-      title: "Buy bread",
-      description: "quickly",
-      done: false
-    },
-  ]
+  tasks: []
 }
 //? -------- SET GLOBAL CONTEXT -------------
 
@@ -29,15 +22,24 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "ADD_TASK", payload: { ...newTask, id: v4().split("-")[1] } })
   }
 
-  //? -------- DELETE TASK FUNCTION -------------
+  //? -------- DELETE ALL FUNCTION -------------
 
-  const deleteTask = () => {
+  const deleteAll = () => {
     dispatch({ type: "DELETE_TASK" })
   }
 
+  //? -------- DELETE TASK BY ID FUNCTION -------------
+
+  const deleteTaskById = (id) => {
+    dispatch({ type: "DELETE_BY_ID", payload: id })
+  }
+
+  const updateTask = (id) => {
+    dispatch({ type: "UPDATE_TASK", payload: id })
+  }
 
   return (
-    <GlobalContext.Provider value={{ ...state, addNewTask, deleteTask }}>
+    <GlobalContext.Provider value={{ ...state, addNewTask, deleteAll, deleteTaskById, updateTask }}>
       {children}
     </GlobalContext.Provider>
   )
